@@ -87,7 +87,7 @@ public class AssignmentServiceImpl implements AssignmentService {
         currentAssignment.setStatus(AssignmentStatus.REASSIGNED);
         assignmentRepository.save(currentAssignment);
 
-        // Reset old vehicle status if needed (assuming it's the same vehicle or a different one)
+        // Reset old vehicle status if needed
         Vehicle oldVehicle = currentAssignment.getVehicle();
         oldVehicle.setStatus(VehicleStatus.AVAILABLE);
         vehicleRepository.save(oldVehicle);

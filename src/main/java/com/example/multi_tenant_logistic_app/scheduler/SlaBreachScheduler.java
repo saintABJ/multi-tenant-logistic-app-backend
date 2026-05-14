@@ -39,9 +39,8 @@ public class SlaBreachScheduler {
             }
         }
     }
-    @Scheduled(cron = "0 0 1 * * ?") // Run at 1 AM every day
+    @Scheduled(cron = "0 0 1 * * ?")
     public void nightlyCleanup() {
         log.info("Running nightly cleanup job...");
-        // Implement cleanup logic here if needed
     }
 }

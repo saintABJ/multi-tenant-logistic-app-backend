@@ -69,11 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
             throw new BadRequestException("Shipment already rated");
         }
 
-        // Find driver from assignment
-        // Assuming completed assignment still exists
-        List<DeliveryAssignment> assignments = assignmentRepository.findByDriverId(null); // Need to find by shipment!
-        // I didn't add findByShipmentId to assignmentRepository. Let's add it or use a query.
-        // I have findByShipmentIdAndStatus. Let's find COMPLETED assignment.
+        List<DeliveryAssignment> assignments = assignmentRepository.findByDriverId(null);
         DeliveryAssignment assignment = assignmentRepository.findByShipmentIdAndStatus(shipment.getId(), AssignmentStatus.COMPLETED)
                 .orElseThrow(() -> new ResourceNotFoundException("Completed assignment not found for shipment"));
 
@@ -97,9 +93,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .orElseThrow(() -> new RuntimeException("Driver profile not found"));
         
         profile.setRatingAverage(BigDecimal.valueOf(avgRating));
-        profile.setTotalDeliveries(profile.getTotalDeliveries() + 1); // Assuming this is incremented here or during delivery.
-        // Actually, total deliveries should be incremented when delivered. Let's do it here or there.
-        // Let's assume here is fine or there. Let's leave it as is or just update average.
+        profile.setTotalDeliveries(profile.getTotalDeliveries() + 1);
         
         driverProfileRepository.save(profile);
     }

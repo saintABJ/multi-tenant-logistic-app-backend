@@ -1,8 +1,6 @@
 package com.example.multi_tenant_logistic_app.service;
 
 import com.example.multi_tenant_logistic_app.domain.entity.*;
-import com.example.multi_tenant_logistic_app.domain.enumeration.ShipmentStatus;
-import com.example.multi_tenant_logistic_app.dto.responses.DriverResponse;
 import com.example.multi_tenant_logistic_app.dto.responses.RevenueReportResponse;
 import com.example.multi_tenant_logistic_app.repository.*;
 import com.example.multi_tenant_logistic_app.repository.projection.RevenueReportProjection;
@@ -14,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -147,8 +144,6 @@ public class CompanyAdminServiceTest {
     @Test
     public void testGetRevenueReport() {
         List<RevenueReportProjection> projections = new ArrayList<>();
-        // Projections are interfaces, so we need to mock them or use a concrete class if available.
-        // Let's assume we can mock them.
         RevenueReportProjection p = mock(RevenueReportProjection.class);
         when(p.getShipmentType()).thenReturn("EXPRESS");
         when(p.getMonth()).thenReturn(5);

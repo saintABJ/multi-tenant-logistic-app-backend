@@ -80,13 +80,12 @@ public class ShipmentServiceImpl implements ShipmentService {
                 .declaredValue(request.getDeclaredValue())
                 .shipmentType(request.getShipmentType())
                 .status(ShipmentStatus.PENDING)
-                .baseFee(fee) // Assuming computeFee returns total base fee or total fee. Let's assume total fee for now.
+                .baseFee(fee)
                 .totalFee(fee)
                 .build();
 
         shipment = shipmentRepository.save(shipment);
 
-        // Auto-generate invoice
         Invoice invoice = Invoice.builder()
                 .shipment(shipment)
                 .customer(customer)
@@ -97,7 +96,7 @@ public class ShipmentServiceImpl implements ShipmentService {
 
         invoiceRepository.save(invoice);
 
-        // Initial status update
+
         ShipmentStatusUpdate statusUpdate = ShipmentStatusUpdate.builder()
                 .shipment(shipment)
                 .status(ShipmentStatus.PENDING)
