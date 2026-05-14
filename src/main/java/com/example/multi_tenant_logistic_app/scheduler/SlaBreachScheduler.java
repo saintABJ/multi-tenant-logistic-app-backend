@@ -21,7 +21,7 @@ public class SlaBreachScheduler {
         this.shipmentRepository = shipmentRepository;
     }
 
-    @Scheduled(fixedRate = 60000) // Run every minute for demo
+    @Scheduled(fixedRate = 60000)
     @Transactional
     public void detectSlaBreaches() {
         log.info("Running SLA breach detection job...");
